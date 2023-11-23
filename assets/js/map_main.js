@@ -9,8 +9,8 @@ function handleImage(e) {
     var reader = new FileReader();
     reader.onload = function(event) {
         var img = new Image();
+        images["airPhoto"] = img;
         img.onload = function() {
-            images["airPhoto"] = img;
             imagesAreNowLoaded();
         }
         img.src = event.target.result;
@@ -61,6 +61,7 @@ function startLoadingAllImages(callback)
 
 function imagesAreNowLoaded()
 {
+    alert("all images loaded!!")
     var maxWidth = photoCtx.canvas.width;
     var maxHeight = photoCtx.canvas.height;
     var img = images["airPhoto"];
