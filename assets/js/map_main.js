@@ -8,6 +8,7 @@ imageLoader.addEventListener('change', handleImage, false);
 function handleImage(e) {
     var reader = new FileReader();
     reader.onload = function(event) {
+        alert("on load reader");
         var img = new Image();
         images["airPhoto"] = img;
         img.onload = function() {
