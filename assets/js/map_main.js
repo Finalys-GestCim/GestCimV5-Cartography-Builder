@@ -1,10 +1,5 @@
 var imagesOK = 0;
 
-
-
-var imageLoader = document.getElementById('imageLoader');
-imageLoader.addEventListener('change', handleImage, false);
-
 function handleImage(e) {
     var reader = new FileReader();
     reader.onload = function(event) {
@@ -47,7 +42,7 @@ function startLoadingAllImages(callback)
         img.onerror = function(){
             if (nameImg == "airPhoto")
             {
-                alert("Veuillez placer la photo aérienne dans le dossier data");
+                alert("Veuillez charger la photo en cliquant sur le bouton parcourir dans le panneau latéral");
             }
             else
             {
@@ -62,7 +57,6 @@ function startLoadingAllImages(callback)
 
 function imagesAreNowLoaded()
 {
-    alert("all images loaded!!")
     var maxWidth = photoCtx.canvas.width;
     var maxHeight = photoCtx.canvas.height;
     var img = images["airPhoto"];
