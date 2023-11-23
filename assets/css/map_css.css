@@ -1,0 +1,311 @@
+.responsive {
+    width: 100%;
+    height: 100%;
+}
+
+canvas {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+#mapContainer {
+    position: relative;
+    diplay: flex;
+    -webkit-apperance:none;
+    -moz-apperance:none;
+}
+
+#mapContainer #zoomButtons button {
+    z-index: 2;
+    position: relative;
+    float: right;
+    margin: 0;
+    padding: 2px 5px;
+}
+
+#mapContainer #displayMapContainer button#downloadImageButton {
+    z-index: 4;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 4px 10px;
+}
+
+#displayMapContainer {
+    width: calc(100% - 200px);
+    height: 100%;
+    position: relative;
+}
+
+#displayMapContainer canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#photoCanvas {
+    z-index: 0;
+}
+
+#mapCanvas {
+    z-index: 1;
+}
+
+#mapContainer #toolbar {
+    z-index: 3;
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background: #bce4f9;
+    margin: 0;
+    padding: 0;
+}
+
+#mapContainer #toolbar ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: block;
+}
+
+#mapContainer #toolbar li {
+    list-style: none;
+    text-align: center;
+    align: center;
+    font: 1em serif ;
+    text-decoration: none ;
+    background-color: #285e8e;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 6px 0;
+    width: calc(100%);
+    height: 22px;
+}
+
+/* first li */
+#mapContainer #toolbar #addGrave li {
+    margin-top: 0;
+}
+
+#mapContainer #toolbar li.thin {
+    height: 0;
+}
+
+#mapContainer #toolbar a {
+    display: block;
+}
+
+#mapContainer #toolbar .btn {
+    font-family: serif;
+    font-size: 0.85em;
+    margin: 5px;
+    padding: 4px 10px;
+    background: #f0eeee;
+    border: 1px solid #808080;
+    color: #000;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#mapContainer #toolbar .btn:hover {
+    background-color: #e0e0e0;
+    text-shadow: 0 -1px #eee;
+}
+
+#mapContainer #toolbar .btn:active {
+    background: #d3d3d3;
+    text-shadow: 0 -1px #eee;
+    text-decoration: none;
+    border: 1px solid #808080;
+}
+
+#mapContainer #toolbar .iconButtonLine .btn {
+    margin: 8px 2px;
+    padding-bottom: 2px;
+}
+
+#mapContainer #toolbar .large {
+    width: 180px;
+    margin: 5px auto;
+    padding: 4px 0px;
+    text-align: center;
+}
+
+#mapContainer #toolbar .large i {
+    margin: 0px 6px;
+}
+
+#mapContainer #toolbar #elementLibrary {
+    width: 170px;
+    height: 60px;
+    border: thick double #32a1ce;
+    background-color: #fff;
+    margin: auto;
+    display: flex;
+}
+
+#mapContainer #toolbar #elementLibrary .libraryImage{
+    margin: auto;
+    display: inline;
+    border: 1px solid #808080;
+    height: 50px;
+    cursor: pointer;
+}
+
+#mapContainer #toolbar #elementLibrary .libraryImage:hover {
+    border: 2px solid #808080;
+}
+
+#mapContainer #toolbar #elementLibrary .libraryImage:active {
+    border: 2px solid #808080;
+}
+
+#mapContainer #toolbar #elementLibrary img {
+    margin: 10px;
+}
+
+#mapContainer #toolbar #elementLibrary img#boussole{
+    margin: 5px 10px;
+}
+
+#mapContainer #toolbar div.drawingTools {
+    display: flex;
+}
+
+#mapContainer #toolbar div.drawingButton {
+    display: flex;
+    width: 100px;
+    text-align: center;
+    flex-direction: column;
+}
+
+#mapContainer #toolbar div.buttonColumn div.drawingButton {
+    margin-top: 5px;
+}
+
+#mapContainer #toolbar div.drawingButton .btn {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    padding: 0;
+    margin: auto;
+}
+
+#mapContainer #toolbar div.drawingConfig {
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: -50px;
+    padding-left: 5px;
+    font-size: 12px;
+    text-align: left;
+}
+
+#mapContainer #toolbar div.drawingConfig input {
+    cursor: pointer;
+    vertical-align: bottom;
+    margin-top: 4px;
+}
+
+#mapContainer #toolbar div.buttonColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+#mapContainer #toolbar div.endButtonColumn {
+    position: absolute;
+    bottom: 15px;
+}
+
+#mapContainer #toolbar .checkboxDiv {
+    font: 14px serif ;
+}
+
+#mapContainer #toolbar .drawingButton .checkboxDiv {
+    margin-top: 5px;
+}
+
+#mapContainer #toolbar .drawingButton #drawGraveButton {
+    margin-top: 5px;
+}
+
+#mapContainer #toolbar .checkboxColumn {
+
+}
+
+#mapContainer #toolbar .checkboxDiv {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+#mapContainer #toolbar .checkboxDiv input {
+    cursor: pointer;
+    vertical-align: center;
+}
+
+#menuCanvas {
+    display: none;
+    position: absolute;
+    width: 200px;
+    right: 0;
+}
+
+.btn {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.btn .toolTip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.btn .toolTip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+*,*:focus,*:hover{
+    outline:none;
+}
+
+.btn:hover .toolTip {
+    visibility: visible;
+    opacity: 1;
+}

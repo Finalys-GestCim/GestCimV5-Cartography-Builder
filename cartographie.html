@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Cartographie Ad Vitam</title>
+    <link rel="stylesheet" media="screen" type="text/css" href="assets/css/map_css.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/all.css">
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            border: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="mapContainer" class="responsive">
+    <div id="displayMapContainer">
+        <canvas id="photoCanvas"> </canvas>
+        <canvas id="mapCanvas" style="border:1px solid #c3c3c3;" tabindex='1'>
+            Votre navigateur ne prend pas en charge l'élément canvas.
+        </canvas>
+        <div id="zoomButtons">
+            <button id="zoomOut"><i class="fas fa-minus"></i></button>
+            <button id="zoomIn"><i class="fas fa-plus"></i></button>
+        </div>
+
+        <button id="downloadImageButton" class="btn">
+                <span class="toolTip" id="downloadImageToolTip">Télécharger le plan au format image</span>
+                <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+
+    <div id="toolbar">
+        <ul>
+            <div id="addGrave">
+                <li>Ajouter une tombe</li>
+                <div class="drawingTools">
+                    <div class="drawingButton">
+                        <button id="drawGraveButton" class="btn">
+                            <span class="toolTip" id="graveToolTip">Dessiner une tombe</span>
+                            <i class="fas fa-vector-square fa-2x"></i>
+                        </button>
+
+                        <div class="checkboxDiv">
+                            <input type="checkbox" id="ossuaryCheckbox" name="ossuaryCheckbox"/>
+                            <label for="ossuaryCheckbox">Ossuaire</label>
+                        </div>
+
+                    </div>
+
+                    <div class="drawingConfig">
+                        <h10>Par défaut :</h10>
+
+                        <label class="simpleGrave">
+                            <input type="radio" checked="checked" id="simpleGrave" name="radio1">
+                            <span class="checkmark"></span>
+                            2 m²
+                        </label>
+
+                        <label class="doubleGrave">
+                            <input type="radio" name="radio1">
+                            <span class="checkmark"></span>
+                            4 m²
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <li>Ajouter un élément</li>
+            <div class="drawingTools">
+
+                <div class="buttonColumn">
+                    <div class="drawingButton">
+                        <button id="drawPolygonButton" class="btn">
+                            <span class="toolTip" id="polygonToolTip">Dessiner un polygone</span>
+                            <i class="fas fa-draw-polygon fa-2x"></i>
+                        </button>
+                    </div>
+
+                    <div class="drawingButton">
+                        <button id="drawRectangleButton" class="btn">
+                            <span class="toolTip" id="rectangleToolTip">Dessiner un rectangle</span>
+                            <i class="fas fa-vector-square fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="drawingConfig">
+                    <h10>Epaisseur du trait :</h10>
+
+                    <label class="thinLine">
+                        <input type="radio" checked="checked" id="thinLine" name="radio2">
+                        <span class="checkmark"></span>
+                        fin
+                    </label>
+
+                    <label class="mediumLine">
+                        <input type="radio" checked="checked" id="mediumLine" name="radio2">
+                        <span class="checkmark"></span>
+                        moyen
+                    </label>
+
+                    <label class="thickLine">
+                        <input type="radio" name="radio2" id="thickLine">
+                        <span class="checkmark"></span>
+                        épais
+                    </label>
+
+                    <label class="veryThickLine">
+                        <input type="radio" name="radio2" id="veryThickLine">
+                        <span class="checkmark"></span>
+                        très épais
+                    </label>
+                </div>
+            </div>
+
+            <li class="thin"></li>
+
+            <div id="elementLibrary">
+                <div class="libraryImage">
+                    <img id="compass" src="Images/boussole.png" width="30px" alt="boussole"/>
+                </div>
+                <div class="libraryImage">
+                    <img id="faucet" src="Images/robinet.png" width="30px" alt="point d'eau"/>
+                </div>
+                <div class="libraryImage">
+                    <img id="bin" src="Images/poubelle.png" width="30px" alt="poubelle"/>
+                </div>
+            </div>
+
+            <div class="iconButtonLine">
+
+                <button id="addTextButton" class="btn"><i class="fas fa-font"></i>
+                    <span class="toolTip" id="addTextToolTip">Ajouter une zone de texte</span>
+                </button>
+
+                <button id="addArrowButton" class="btn"><i class="fas fa-arrow-right"></i>
+                    <span class="toolTip" id="arrowToolTip">Dessiner une flèche</span>
+                </button>
+            </div>
+
+            <li class="thin"></li>
+
+            <div class="iconButtonLine">
+
+                <button id="defaultCursorButton" class="btn"><i class="fas fa-mouse-pointer"></i>
+                    <span class="toolTip" id="cursorToolTip">Annuler l'action en cours</span>
+                </button>
+
+                <button id="copyButton" class="btn"><i class="far fa-clone"></i>
+                    <span class="toolTip" id="copyToolTip">Dupliquer un élément</span>
+                </button>
+
+                <button id="deleteButton" class="btn">
+                    <span class="toolTip" id="deleteToolTip">Supprimer un élément</span>
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+
+            <div class="checkboxColumn">
+
+                <div class="checkboxDiv">
+                    <input type="checkbox" id="displayBackground" name="displayBackground"/>
+                    <label for="displayBackground">Photo aérienne</label>
+                </div>
+
+                <div class="checkboxDiv">
+                    <input type="checkbox" id="displayGraveColor" name="displayGraveColor"/>
+                    <label for="displayGraveColor">Couleur des tombes</label>
+                </div>
+
+            </div>
+
+            <div class="endButtonColumn">
+
+                <button id="setGraveColorButton" class="btn large">
+                    <span class="toolTip" id="setGraveColorToolTip">Cliquer sur la couleur puis les tombes à colorer</span>
+                    Indiquer la couleur des tombes
+                </button>
+
+                <button id="setGraveDirectionButton" class="btn large">
+                    <span class="toolTip" id="setGraveDirectionToolTip">Cliquer sur le triangle en haut de chaque tombe</span>
+                    <i class="fas fa-caret-down"></i>
+                    Indiquer le sens des tombes
+                </button>
+
+                <button id="setScaleButton" class="btn large">
+                    <span class="toolTip" id="scaleToolTip">Cliquer sur les 2 extrémités de l'étalon</span>
+                    <i class="fas fa-ruler-horizontal"></i> Indiquer l'échelle du plan
+                </button>
+
+                <button id="measureButton" class="btn large">
+                    <span class="toolTip" id="measureToolTip">Cliquer sur les 2 extrémités du segment à mesurer</span>
+                    <i class="fas fa-ruler-horizontal"></i> Mesurer une distance
+                </button>
+
+                <button id="saveButton" class="btn large">
+                    <i class="far fa-save"></i>
+                    Sauvegarder
+                </button>
+
+                <!-- <a href="#" id="closeButton" class="btn large">
+                    <i class="fas fa-times"></i>
+                    Quitter
+                </a> -->
+
+            </div>
+        </ul>
+    </div>
+
+</div>
+
+<script language="javascript" src="./assets/js/map_variables.js"></script>
+<script language="javascript" src="./data/plan.json"></script>
+<script language="javascript" src="./assets/js/map_main_functions.js"></script>
+<script language="javascript" src="./assets/js/map_grave_functions.js"></script>
+<script language="javascript" src="./assets/js/map_polygon_functions.js"></script>
+<script language="javascript" src="./assets/js/map_rectangle_functions.js"></script>
+<script language="javascript" src="./assets/js/map_information_element_functions.js"></script>
+<script language="javascript" src="./assets/js/map_drawing.js"></script>
+<script language="javascript" src="./assets/js/map_toolbar.js"></script>
+<script language="javascript" src="./assets/js/map_modification_action.js"></script>
+<script language="javascript" src="./assets/js/map_main.js"></script>
+
+</body>
+</html>
