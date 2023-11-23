@@ -1,5 +1,23 @@
 var imagesOK = 0;
 
+
+
+var imageLoader = document.getElementById('imageLoader');
+imageLoader.addEventListener('change', handleImage, false);
+
+function handleImage(e) {
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var img = new Image();
+        img.onload = function() {
+            imagesAreNowLoaded();
+        }
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);
+}
+
+
 // Create a new Image() for each item in imageSources[]
 // When all images are loaded, run the callback (==imagesAreNowLoaded)
 function startLoadingAllImages(callback)
