@@ -10,6 +10,7 @@ function handleImage(e) {
     reader.onload = function(event) {
         var img = new Image();
         img.onload = function() {
+            images["airPhoto"] = img;
             imagesAreNowLoaded();
         }
         img.src = event.target.result;
