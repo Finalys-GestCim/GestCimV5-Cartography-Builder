@@ -439,7 +439,10 @@ function createMap()
 function initMap()
 {
     refreshSizeCanvas();
-
+    
+    var imageLoader = document.getElementById('imageLoader');
+    imageLoader.addEventListener('change', handleImage, false);
+    
     startLoadingAllImages(imagesAreNowLoaded);
 }
 
