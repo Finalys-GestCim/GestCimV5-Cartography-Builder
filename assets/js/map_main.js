@@ -51,8 +51,11 @@ function getImageFromIndexedDB(imageId) {
     return new Promise((resolve, reject) => {
         console.log("PROMISE CALLED");
         var transaction = db.transaction(["images"], "readonly");
+        console.log("TRANSAC DONE");
         var objectStore = transaction.objectStore("images");
+        console.log("OBJECT STORE FOUND");
         var request = objectStore.get(imageId);
+        console.log("REQUEST DONE");
 
         request.onsuccess = function(event) {
             if (request.result) {
