@@ -49,6 +49,7 @@ function storeImageInIndexedDB(dataUrl) {
 
 function getImageFromIndexedDB(imageId) {
     return new Promise((resolve, reject) => {
+        console.log("PROMISE CALLED");
         var transaction = db.transaction(["images"], "readonly");
         var objectStore = transaction.objectStore("images");
         var request = objectStore.get(imageId);
@@ -109,7 +110,7 @@ function startLoadingAllImages(callback)
             getImageFromIndexedDB("image_id")
                 .then(imageData => {
                     if (imageData) {
-                        img.src = imageSources[nameImg];
+                        img.src = imageData;
                     } else {
                         alert("Veuillez charger la photo en cliquant sur le bouton parcourir dans le panneau latéral");
                     }
