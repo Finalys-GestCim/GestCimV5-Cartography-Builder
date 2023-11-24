@@ -47,6 +47,27 @@ function storeImageInIndexedDB(dataUrl) {
     };
 }
 
+function getImageFromIndexedDB(imageId) {
+    return new Promise((resolve, reject) => {
+        var transaction = db.transaction(["images"], "readonly");
+        var objectStore = transaction.objectStore("images");
+        var request = objectStore.get(imageId);
+
+        request.onsuccess = function(event) {
+            if (request.result) {
+                resolve(request.result.image);
+            } else {
+                console.log("No image found with the id:", imageId);
+                resolve(null); // Résoudre avec `null` si aucune image n'est trouvée
+            }
+        };
+
+        request.onerror = function(event) {
+            console.log("Error retrieving image from IndexedDB:", event);
+            reject(event); // Rejeter la promesse en cas d'erreur
+        };
+    });
+}
 
 // Create a new Image() for each item in imageSources[]
 // When all images are loaded, run the callback (==imagesAreNowLoaded)
@@ -83,9 +104,25 @@ function startLoadingAllImages(callback)
             }
         }
 
-        // set img properties
-        img.src = imageSources[nameImg];
-    }
+        
+        if (nameImg=="airPhoto"){
+            getImageFromIndexedDB("image_id")
+                .then(imageData => {
+                    if (imageData) {
+                        img.src = imageSources[nameImg];
+                    } else {
+                        alert("Veuillez charger la photo en cliquant sur le bouton parcourir dans le panneau latéral");
+                    }
+                })
+                .catch(error => {
+                    alert("Erreur : Veuillez charger la photo en cliquant sur le bouton parcourir dans le panneau latéral");
+                });
+        }else
+            // set img properties
+            img.src = imageSources[nameImg];
+        }
+        }
+        
 }
 
 function imagesAreNowLoaded()
