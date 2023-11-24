@@ -442,6 +442,8 @@ function initMap()
     
     var imageLoader = document.getElementById('imageLoader');
     imageLoader.addEventListener('change', handleImage, false);
+
+    initIndexedDB();
     
     startLoadingAllImages(imagesAreNowLoaded);
 }
