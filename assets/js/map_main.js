@@ -117,12 +117,11 @@ function startLoadingAllImages(callback)
                 .catch(error => {
                     alert("Erreur : Veuillez charger la photo en cliquant sur le bouton parcourir dans le panneau latéral");
                 });
-        }else
+        }else{
             // set img properties
             img.src = imageSources[nameImg];
         }
-        }
-        
+    }    
 }
 
 function imagesAreNowLoaded()
