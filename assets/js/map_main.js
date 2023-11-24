@@ -1,5 +1,24 @@
 var imagesOK = 0;
 
+var db;
+
+function initIndexedDB() {
+    var request = indexedDB.open("myDatabase", 1);
+
+    request.onupgradeneeded = function(event) {
+        db = event.target.result;
+        var objectStore = db.createObjectStore("images", { keyPath: "id" });
+    };
+
+    request.onsuccess = function(event) {
+        db = event.target.result;
+    };
+
+    request.onerror = function(event) {
+        console.log("Error opening IndexedDB:", event);
+    };
+}
+
 function handleImage(e) {
     var reader = new FileReader();
     reader.onload = function(event) {
@@ -7,10 +26,25 @@ function handleImage(e) {
         images["airPhoto"] = img;
         img.onload = function() {
             imagesAreNowLoaded();
+            storeImageInIndexedDB(event.target.result); // Stocker l'image dans IndexedDB
         }
         img.src = event.target.result;
     }
     reader.readAsDataURL(e.target.files[0]);
+}
+
+function storeImageInIndexedDB(dataUrl) {
+    var transaction = db.transaction(["images"], "readwrite");
+    var objectStore = transaction.objectStore("images");
+    var request = objectStore.add({ id: "image_id", image: dataUrl });
+
+    request.onsuccess = function(event) {
+        console.log("Image stored in IndexedDB");
+    };
+
+    request.onerror = function(event) {
+        console.log("Error storing image in IndexedDB:", event);
+    };
 }
 
 
